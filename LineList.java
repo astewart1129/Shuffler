@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class LineList {
@@ -36,13 +37,21 @@ public class LineList {
 		strings.add(newIndex,indexLine);
 	}
 	
+	private void swap(int i, int i2)
+	{
+		String temp = strings.get(i);
+		strings.set(i,strings.get(i2));
+		strings.set(i2,temp);
+	}
+	
 	public void shuffle()
 	{
+		Random r = new Random();
 		for(int i = strings.size();i>=2;i--)
 		{
-			int index1 = (int)(Math.random()*(i-1));
-			int index2 = (int)(Math.random()*(i-1));
-			move(index1,index2);
+			int index1 = r.nextInt(i);
+			int index2 = r.nextInt(i);
+			swap(index1,index2);
 		}
 	}
 	
@@ -54,16 +63,20 @@ public class LineList {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		LineList tester = new LineList();
-		//tester.add("Hello");
-		//tester.add("World");
-		//tester.add("Test");
-		//tester.add("123");
+		tester.add("Hello");
+		tester.add("World");
+		tester.add("Test");
+		tester.add("123");
 		tester.add("a");
 		tester.add("b");
 		tester.add("c");
 		tester.add("d");
-		tester.move(2,2);
-		System.out.println(tester);
+		for(int x=0;x<=20;x++)
+		{
+			tester.shuffle();
+			System.out.println("Shuffle #"+x+": "+tester);
+		}
+		
 		
 
 	}
